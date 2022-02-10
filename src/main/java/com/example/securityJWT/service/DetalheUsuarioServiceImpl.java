@@ -12,20 +12,22 @@ import com.example.securityJWT.model.UsuarioModel;
 import com.example.securityJWT.repository.UsuarioRepository;
 
 @Component
-public class DetalheUsuarioServiceImpl implements UserDetailsService{
+public class DetalheUsuarioServiceImpl implements UserDetailsService {
 
-	
-	private final UsuarioRepository repository = null;
-	
-	
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Optional<UsuarioModel> usuario = repository.findByLogin(username);
-		if(usuario.isEmpty()) {
-			throw new UsernameNotFoundException("Usuario [" +username+ "] não encontrado!");
-		}
-		
-		return new DetalheUsuarioData(usuario);
-	}
+    private final UsuarioRepository repository;
+
+    public DetalheUsuarioServiceImpl(UsuarioRepository repository) {
+        this.repository = repository;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional<UsuarioModel> usuario = repository.findByLogin(username);
+        if (usuario.isEmpty()) {
+            throw new UsernameNotFoundException("Usuário [" + username + "] não encontrado");
+        }
+
+        return new DetalheUsuarioData(usuario);
+    }
 
 }

@@ -9,52 +9,46 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.example.securityJWT.model.UsuarioModel;
 
-public class DetalheUsuarioData implements UserDetails{
+public class DetalheUsuarioData implements UserDetails {
 
-	
-	private final Optional<UsuarioModel> usuario;
-	
-	public DetalheUsuarioData(Optional<UsuarioModel> usuario) {
-		this.usuario = usuario;
-	}
-	
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return new ArrayList<>();
-	}
+    private final Optional<UsuarioModel> usuario;
 
-	@Override
-	public String getPassword() {
-		return usuario.orElse(new UsuarioModel()).getPassword();
-	}
+    public DetalheUsuarioData(Optional<UsuarioModel> usuario) {
+        this.usuario = usuario;
+    }
 
-	@Override
-	public String getUsername() {
-		return usuario.orElse(new UsuarioModel()).getLogin();
-	}
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return new ArrayList<>();
+    }
 
-	@Override
-	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
+    @Override
+    public String getPassword() {
+        return usuario.orElse(new UsuarioModel()).getPassword();
+    }
 
-	@Override
-	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return true;
-	}
+    @Override
+    public String getUsername() {
+        return usuario.orElse(new UsuarioModel()).getLogin();
+    }
 
-	@Override
-	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
 
-	@Override
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return true;
-	}
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
 
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
